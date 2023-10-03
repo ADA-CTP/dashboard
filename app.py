@@ -6,14 +6,13 @@ import plotly.express as px
 df = pd.read_csv('./sleep_dataset.csv')
 
 # Initialize the app -> team name is ada
-ada = Dash(__name__)
+app = Dash(__name__)
 
-ada.layout = html.Div
-([
+app.layout = html.Div([
     html.Div(children= "Sleep Analysis"),
-    dash_table.DataTable(data=df.to_dict('records'), page_size=10)
-    dcc.Graph(figure=px.histogram(df, x='Occupation'))
+    dash_table.DataTable(data=df.to_dict('records'), page_size=10),
+    dcc.Graph(figure=px.histogram(df, x=df.Occupation.sort_values(), title='Sleep Occupation'))
 ])
 
 if __name__ == '__main__':
-    ada.run(debug=True)
+    app.run(debug=True)
