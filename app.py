@@ -10,7 +10,8 @@ df.sort_values('Occupation', inplace=True)
 app = Dash(__name__)
 
 app.layout = html.Div([
-    html.Div(children= "Sleep Analysis"),
+    html.Div(className='row', children='My First App with Data, Graph, and Controls',
+             style={'textAlign': 'center', 'color': 'Lightblue', 'fontSize': 25, 'font-weight': 'bold'}),
     dash_table.DataTable(data=df.to_dict('records'), page_size=10),
     dcc.Graph(figure=px.histogram(df, x=df['Occupation'], title='Sleep Occupation')),
     dcc.Graph(figure=px.histogram(df, x=df['Occupation'].unique(), y=df.groupby('Occupation')['Sleep Duration'].mean().round(2), labels={"x": "Occupation", "y": "Avg Sleep Duration"}, title='Avg Sleep Duration'))
